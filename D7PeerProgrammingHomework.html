@@ -49,11 +49,11 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-suto col-md-auto text-center">
-        <h1>Card Info</h1>
+      <div class="col-sm-auto col-md-auto col-lg-auto text-center">
+        <h1>Directory</h1>
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropDownMenu" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false" onclick="function()">
+           aria-haspopup="true" aria-expanded="false" onclick="function()">
             Dropdown
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -61,6 +61,7 @@
             <button class="dropdown-item" type="button">User Name</button>
             <button class="dropdown-item" type="button">Email</button>
           </div>
+          <input type="text" id="query" onkeydown="search()">
           <!-- populate with infos -->
         </div>
       </div>
@@ -81,46 +82,94 @@
   </script>
 
   <script>
-    function userCard(cardInfo) {
-      console.log(cardInfo);
-      return `
-  <div class="col-sm-suto col-md-auto text-center" id=${cardInfo}>
-    <p>
-      <a href="" id=${cardInfo.name}>Name</a>
-      </p>
-    </div>
-  `;
+    // create a search function within the #query field
+    search = async () => { //this is paired with line 64's onkeydown search function
+      console.log(document.querySelector("#query").value) 
     }
 
-    handleInfo = async (name, username, email, domPlaceholder) => {
+    // populate the page with cards 
+  
 
-      try {
-        let reponse = await fetch("https://jsonplaceholder.typicode.com/users" {
-          method: "GET"
-        })
-        let info = await response.json()
-        let cardInfo = names.data;
-        let div = document.querySelector(domPlaceholder);
-        div.innerHTML += pTag(cardInfo[0]);
-      } catch (err) {
-        console.log(err)
-      }
-    }
 
-    window.onload = async () => {
-      var name = [];
-      var username = [];
-      var email = [];
 
-      for (var i = 0; i < name.length; i++)
-        await handleInfo(name[i], "#dropDownMenu")
 
-      for (var i = 0; i < username.length; i++)
-        await handleInfo(username[i], "#dropDownMenu")
+    // const applyFilter (filter, name, username, email) => {
+  //     const dirInfo = new Name().getName();
+  //     let results;
+  //     if (filter === 'name') {
+  //       console.log('name')
+  //     } else if (filter === username);
+  //       console.log('username'){
 
-      for (var i = 0; i < email.length; i++)
-        await handleInfo(email[i], "#dropDownMenu")
-    };
+  //       }else if (filter === email);
+  //       console.log('email'){
+
+  //       }
+
+  //       return results;
+  //   };
+
+  //   this.addEventListener('info', )
+
+
+  //   function userCard(cardInfo) {
+  //     console.log(cardInfo);
+  //     return `
+  // <div class="col-sm-auto col-md-auto col-lg-auto text-center" id=${cardInfo}>
+  //   <p>
+  //     <a href="" id=${cardInfo.name}>Name</a>
+  //     </p>
+  //   </div>
+  // `;
+  //   }
+
+  //   handleInfo = async (name, username, email, domPlaceholder) => {
+
+  //     try {
+  //       let reponse = await fetch("https://jsonplaceholder.typicode.com/users", {
+  //         method: "GET"
+  //       })
+  //       let info = await response.json()
+  //       let cardInfo = names.data;
+  //       let div = document.querySelector(domPlaceholder);
+  //       div.innerHTML += pTag(cardInfo[0]);
+  //     } catch (err) {
+  //       console.log(err)
+  //     }
+  //   }
+  //   window.onload = function(getInfo)
+  //   var dirName = new URLSearchParams(document.location.search).get("name");
+
+    // window.onload = async () => {
+    //   var name = [];
+    //   var username = [];
+    //   var email = [];
+
+    //   for (var i = 0; i < name.length; i++)
+    //     await handleInfo(name[i], "#dropDownMenu")
+
+    //   for (var i = 0; i < username.length; i++)
+    //     await handleInfo(username[i], "#dropDownMenu")
+
+    //   for (var i = 0; i < email.length; i++)
+    //     await handleInfo(email[i], "#dropDownMenu")
+    // };
+
+  // function handleInfo(info) {
+  // const infoObj = JSON.parse(info);
+  // // const weatherDiv = document.querySelector('#weather');
+  // const div = `
+  //       <p>
+  //       <img
+  //           src="https://jsonplaceholder.typicode.com/users${dataObj.info[0].name}"
+  //           alt="${dataObj.name[0].info}"
+  //           width="50"
+  //           height="50"
+  //       />${dataObj.name}
+  //       </p>
+
+  //   `;
+  // return div;
   </script>
 </body>
 
