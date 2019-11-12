@@ -53,14 +53,14 @@
         <h1>Directory</h1>
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropDownMenu" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false" onclick="function()">
+            aria-haspopup="true" aria-expanded="false" onclick="loadAPI()">
             Dropdown
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
             <button class="dropdown-item" type="button">Name</button>
             <button class="dropdown-item" type="button">User Name</button>
             <button class="dropdown-item" type="button">Email</button>
-          </div>
+          </div id="placeholder">
           <input type="text" id="query" onkeydown="search()">
           <!-- populate with infos -->
         </div>
@@ -84,73 +84,78 @@
   <script>
     // create a search function within the #query field:
     search = async () => { //this is paired with line 64's onkeydown search function
-      console.log(document.querySelector("#query").value) 
+      console.log(document.querySelector("#query").value)
     }
 
-    // fetch and populate with api info:
-    handleInfo = async (name, username, email, domPlaceholder) => {
-      try {
-        let reponse = await fetch("https://jsonplaceholder.typicode.com/users", {
-          method: "GET"
-        })
-        let info = await response.json()
-        let cardInfo = names.data;
-        let div = document.querySelector(domPlaceholder);
-        div.innerHTML += pTag(cardInfo[0]);
-      } catch (err) {
-        console.log(err)
+    // fetch api info:
+    loadAPI =() => { //refers to function in line 56, how can i link line 56 onclick function to loading api info?
+      handleInfo = async (name, username, email) => { //parameters
+        try {
+          let reponse = await fetch("https://jsonplaceholder.typicode.com/users", { //fetching the api
+            method: "GET"
+          })
+          let info = await response.json()
+//something missing here? after adapting to json the second .then ?
+
+          let cardInfo = names.data; //what am i pointing here?
+
+          let div = document.querySelector(placeholder);
+          div.innerHTML += placeholder(cardInfo[0]);
+        } catch (err) {
+          console.log(err)
+        }
       }
     }
+     
 
-      // populate the page with divs with api infos:
-    function userCard(cardInfo) {
-      console.log(cardInfo);
-      return `
-  <div class="col-sm-auto col-md-auto col-lg-auto text-center" id=${cardInfo}>
+      // populate the page with divs containing api infos
+        function userCard(cardInfo) {
+          console.log(cardInfo);
+          return 
+          `<div class="col-sm-auto col-md-auto text-center" id="${cardInfo}">
     <p>
-      <a href="" id=${name.cardInfo}>Name</a>
+      <a href="https://jsonplaceholder.typicode.com/users?id=${users.name}">Name</a>
       </p>
-    </div>
-  `;
-    }
+    </div>`;
+        }
 
 
-    window.onload = function(getInfo) {
-      var dirName = new URLSearchParams(document.location.search).get("name");
-    }
+      window.onload = function (getInfo) {
+        var dirName = new URLSearchParams(document.location.search).get("name");
+      }
 
-    window.onload = async () => {
-      var name = [];
-      var username = [];
-      var email = [];
+      window.onload = async () => {
+        var name = [];
+        var username = [];
+        var email = [];
 
-      for (var i = 0; i < name.length; i++)
-        await handleInfo(name[i], "#dropDownMenu")
+        for (var i = 0; i < name.length; i++)
+          await handleInfo(name[i], "#dropDownMenu")
 
-      for (var i = 0; i < username.length; i++)
-        await handleInfo(username[i], "#dropDownMenu")
+        for (var i = 0; i < username.length; i++)
+          await handleInfo(username[i], "#dropDownMenu")
 
-      for (var i = 0; i < email.length; i++)
-        await handleInfo(email[i], "#dropDownMenu")
-    };
+        for (var i = 0; i < email.length; i++)
+          await handleInfo(email[i], "#dropDownMenu")
+      };
 
 
 
-  // function handleInfo(info) {
-  // const infoObj = JSON.parse(info);
-  // // const weatherDiv = document.querySelector('#weather');
-  // const div = `
-  //       <p>
-  //       <img
-  //           src="https://jsonplaceholder.typicode.com/users${dataObj.info[0].name}"
-  //           alt="${dataObj.name[0].info}"
-  //           width="50"
-  //           height="50"
-  //       />${dataObj.name}
-  //       </p>
+      // function handleInfo(info) {
+      // const infoObj = JSON.parse(info);
+      // // const weatherDiv = document.querySelector('#weather');
+      // const div = `
+      //       <p>
+      //       <img
+      //           src="https://jsonplaceholder.typicode.com/users${dataObj.info[0].name}"
+      //           alt="${dataObj.name[0].info}"
+      //           width="50"
+      //           height="50"
+      //       />${dataObj.name}
+      //       </p>
 
-  //   `;
-  // return div;
+      //   `;
+      // return div;
   </script>
 </body>
 
