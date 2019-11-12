@@ -49,7 +49,7 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-auto col-md-auto col-lg-auto text-center">
+      <div class="col-sm-auto col-md-auto text-center">
         <h1>Directory</h1>
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropDownMenu" data-toggle="dropdown"
@@ -82,78 +82,59 @@
   </script>
 
   <script>
-    // create a search function within the #query field
+    // create a search function within the #query field:
     search = async () => { //this is paired with line 64's onkeydown search function
       console.log(document.querySelector("#query").value) 
     }
 
-    // populate the page with cards 
-  
+    // fetch and populate with api info:
+    handleInfo = async (name, username, email, domPlaceholder) => {
+      try {
+        let reponse = await fetch("https://jsonplaceholder.typicode.com/users", {
+          method: "GET"
+        })
+        let info = await response.json()
+        let cardInfo = names.data;
+        let div = document.querySelector(domPlaceholder);
+        div.innerHTML += pTag(cardInfo[0]);
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+      // populate the page with divs with api infos:
+    function userCard(cardInfo) {
+      console.log(cardInfo);
+      return `
+  <div class="col-sm-auto col-md-auto col-lg-auto text-center" id=${cardInfo}>
+    <p>
+      <a href="" id=${name.cardInfo}>Name</a>
+      </p>
+    </div>
+  `;
+    }
 
 
+    window.onload = function(getInfo) {
+      var dirName = new URLSearchParams(document.location.search).get("name");
+    }
+
+    window.onload = async () => {
+      var name = [];
+      var username = [];
+      var email = [];
+
+      for (var i = 0; i < name.length; i++)
+        await handleInfo(name[i], "#dropDownMenu")
+
+      for (var i = 0; i < username.length; i++)
+        await handleInfo(username[i], "#dropDownMenu")
+
+      for (var i = 0; i < email.length; i++)
+        await handleInfo(email[i], "#dropDownMenu")
+    };
 
 
-    // const applyFilter (filter, name, username, email) => {
-  //     const dirInfo = new Name().getName();
-  //     let results;
-  //     if (filter === 'name') {
-  //       console.log('name')
-  //     } else if (filter === username);
-  //       console.log('username'){
-
-  //       }else if (filter === email);
-  //       console.log('email'){
-
-  //       }
-
-  //       return results;
-  //   };
-
-  //   this.addEventListener('info', )
-
-
-  //   function userCard(cardInfo) {
-  //     console.log(cardInfo);
-  //     return `
-  // <div class="col-sm-auto col-md-auto col-lg-auto text-center" id=${cardInfo}>
-  //   <p>
-  //     <a href="" id=${cardInfo.name}>Name</a>
-  //     </p>
-  //   </div>
-  // `;
-  //   }
-
-  //   handleInfo = async (name, username, email, domPlaceholder) => {
-
-  //     try {
-  //       let reponse = await fetch("https://jsonplaceholder.typicode.com/users", {
-  //         method: "GET"
-  //       })
-  //       let info = await response.json()
-  //       let cardInfo = names.data;
-  //       let div = document.querySelector(domPlaceholder);
-  //       div.innerHTML += pTag(cardInfo[0]);
-  //     } catch (err) {
-  //       console.log(err)
-  //     }
-  //   }
-  //   window.onload = function(getInfo)
-  //   var dirName = new URLSearchParams(document.location.search).get("name");
-
-    // window.onload = async () => {
-    //   var name = [];
-    //   var username = [];
-    //   var email = [];
-
-    //   for (var i = 0; i < name.length; i++)
-    //     await handleInfo(name[i], "#dropDownMenu")
-
-    //   for (var i = 0; i < username.length; i++)
-    //     await handleInfo(username[i], "#dropDownMenu")
-
-    //   for (var i = 0; i < email.length; i++)
-    //     await handleInfo(email[i], "#dropDownMenu")
-    // };
 
   // function handleInfo(info) {
   // const infoObj = JSON.parse(info);
